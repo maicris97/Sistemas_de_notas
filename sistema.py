@@ -115,3 +115,31 @@ def mostrar_relatorio():
     print(f"Em recuperação : {recuperacao}")
     print(f"Reprovados     : {reprovados}")
     print(f"Melhor média   : {melhor_nome} ({melhor_media:.1f})")
+
+def main():
+    banco.criar_tabela()          # garante que a tabela existe
+    while True:
+        opcao = mostrar_menu()
+        if opcao == "1":
+            cadastrar_aluno()
+        elif opcao == "2":
+            listar_alunos()
+        elif opcao == "3":
+            buscar_aluno()
+        elif opcao == "4":
+            atualizar_notas()
+        elif opcao == "5":
+            remover_aluno()
+        elif opcao == "6":
+            mostrar_relatorio()
+        elif opcao == "0":
+            print("Até logo!")
+            break
+        else:
+            print("Opção inválida. Tente de novo.")
+
+
+# Só roda o main() quando o arquivo é executado diretamente
+if __name__ == "__main__":
+    main()
+    input("\nPressione ENTER para fechar...")   # evita a janela fechar sozinha no .exe
