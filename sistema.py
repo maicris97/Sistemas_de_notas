@@ -20,8 +20,8 @@ def mostrar_aluno(aluno):
     id_aluno, nome, nota1, nota2 = aluno
     media = utilidades.calcular_media(nota1,nota2)
     situacao = utilidades.situacao(media)
-    print(f"[{id_aluno:>3}] {nome:<22}" 
-          f"N1: {nota1:>4.1f} N2:{nota2:>4.1f}" 
+    print(f"[{id_aluno:>3}] {nome:<22} " 
+          f"N1: {nota1:>4.1f} N2:{nota2:>4.1f} " 
           f"Média: {media:>4.1f} {situacao}")
 
 def cadastrar_aluno():
@@ -39,7 +39,7 @@ def listar_alunos():
         print("Nenhum aluno encontrado.")
         return
     for aluno in alunos:
-        mostrar_aluno()
+        mostrar_aluno(aluno)
 
 def buscar_aluno():
     print("\n--- Buscar aluno ---")
@@ -49,7 +49,7 @@ def buscar_aluno():
         print("Nenhum aluno encontrado.")
         return
     for aluno in alunos:
-        mostrar_aluno()
+        mostrar_aluno(aluno)
 
 def atualizar_notas():
     print("\n--- Atualizar notas ---")
@@ -58,11 +58,11 @@ def atualizar_notas():
     if aluno is None:
         print("Aluno não encontrado.")
         return
-    mostrar_aluno()
+    mostrar_aluno(aluno)
     nota1 = utilidades.ler_nota("Nova nota 1: ")
     nota2 = utilidades.ler_nota("Nova nota 2: ")
     banco.atualizar_notas(id_aluno, nota1, nota2)
-    print("Notas atualizadas")
+    print("Notas atualizadas!")
 
 def remover_aluno():
     print("\n--- Remover aluno ---")
@@ -71,7 +71,7 @@ def remover_aluno():
     if aluno is None:
         print("Aluno não encontrado.")
         return
-    mostrar_aluno()
+    mostrar_aluno(aluno)
     confirmar = input("Tem certeza que deseja remover? (s/n): ").lower()
     if confirmar == "s":
         banco.remover_aluno(id_aluno)

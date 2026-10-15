@@ -27,11 +27,12 @@ def criar_tabela():
     connect.commit()
     connect.close()
 
-def inserir_aluno():
+def inserir_aluno(nome,nota1,nota2):
     '''Devolve uma lista de tuplas: (id,nome,nota1,nota2).'''
     connect = conectar()
     connect.execute(
-        'INSERT INTO aluno(nome, nota1, nota2) VALUES(?, ?, ?)'
+        'INSERT INTO alunos(nome, nota1, nota2) VALUES(?, ?, ?)',
+        (nome, nota1, nota2)
     )
     connect.commit()
     connect.close()
@@ -58,7 +59,7 @@ def buscar_por_id(id_aluno):
     '''Devolve o aluno com esse id ou None se não existir.'''
     connect = conectar()
     aluno = connect.execute(
-        'SELECT id,nome,nota1,nota2 FROM alunos WHERE id = ?',(id_aluno)
+        'SELECT id, nome, nota1, nota2 FROM alunos WHERE id = ?',(id_aluno,)
     ).fetchone()
     connect.close()
     return aluno
@@ -66,7 +67,7 @@ def buscar_por_id(id_aluno):
 def atualizar_notas(id_aluno, nota1, nota2):
     connect = conectar()
     connect.execute(
-        'UPDATE alunos SET nota1 = ?, nota2 = ? WHERE id = ?'
+        'UPDATE alunos SET nota1 = ?, nota2 = ? WHERE id = ?', (nota1, nota2, id_aluno)
     )
     connect.commit()
     connect.close()
@@ -78,3 +79,4 @@ def remover_aluno(id_aluno):
     )
     connect.commit()
     connect.close()
+    
