@@ -34,12 +34,26 @@
             {% for aluno in alunos %}
             <tr>
                 <td>{{ aluno.id }}</td>
-                <td>{{ aluno.id }}</td>
+                <td>{{ aluno.nome }}</td>
                 <td>{{ "%.1f"|format(aluno.nota1) }}</td>
                 <td>{{ "%.1f"|format(aluno.nota2) }}</td>
                 <td>{{ "%.1f"|format(aluno.media) }}</td>
+                <td><span class="selo {{ aluno.classe }}">{{ aluno.situacao }}</span></td>
+                <td class="acoes">
+                    <a href="{{ url_for('editar', id_aluno=aluno.id) }}">Editar</a>
+                    <form action="{{ url_for('remover', id_aluno=aluno.id) }}" method="post" onsubmit="return confirm('Remover {{ aluno.id }}?')">
+                        <button type="submit" class="perigo">Remover</button></form>
+                </td>
             </tr>
-
+             {% endfor %}
         </tbody>
     </table>
 </div>
+{% else %}
+<p>Nenhum aluno encontrado. <a href="{{ url_for('novo') }}">Cadastre o primeiro!</a></p>
+{% endif %}
+{% endblock %}
+
+
+
+
